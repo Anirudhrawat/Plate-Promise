@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PlatePromise</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <nav class="navbar">
+      <div class="container">
+        <h1 class="logo lg-heading text-light">PlatePromise</h1>
+        <ul class="nav-items">
+          <li class="nav-item"><a href="../index/index.html">Home</a></li>
+          <li class="nav-item"><a href="../about/about.html">About</a></li>
+          <li class="nav-item"><a href="../contact/contact.html">Contact</a></li>
+        </ul>
+      </div>
+    </nav>
+  </header>
+  <div class="box">
+    <section>
+      <h2 class="same">Welcome to</h2>
+    <h1 class="same">PlatePromise</h1>
+    <p class="same">We make a Promise to provide a Plate of Food for the Deprived</p>
+    <p>Enter your User details & Food details. <br><span>&#8595;</span></p>
+    </section>
+    <form id="registerForm" class="form">
+      <div class="inputbox">
+        <input type="text" id="registerUsername" class="ip" placeholder="Your Full Name" required>
+      </div>
+      <div class="inputbox">
+        <input type="text" id="registerPhone" class="ip" placeholder="Phone" required>
+      </div>
+      <div class="inputbox" >
+        <input type="email" id="registerEmail" class="ip" placeholder="Email">
+      </div>
+      <div class="inputbox">
+        <input type="text" id="foodDetails" class="ip" placeholder="Food Details" required>
+      </div>
+      <div class="inputbox">
+        <input type="text" id="registerAddress" class="ip" placeholder="Your Address" required>
+      </div>
+      <input type="button" value="Upload" class="sub" id="submit">
+    </form>
+  </div>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.10.0/firebase-app.js"
+    import { getDatabase, ref, set, get, child } from "https://www.gstatic.com/firebasejs/10.10.0/firebase-database.js";
+    
+    const firebaseConfig = {
+      apiKey: "AIzaSyCvtGxG5dpY051rw4LgFCSUh0m56JxRxfM",
+      authDomain: "creativetutorial-b923e.firebaseapp.com",
+      projectId: "creativetutorial-b923e",
+      storageBucket: "creativetutorial-b923e.appspot.com",
+      messagingSenderId: "626044211596",
+      appId: "1:626044211596:web:1470fdf93f20047ec106a9"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getDatabase(app);
+
+    document.getElementById("submit").addEventListener('click', function(e){
+      e.preventDefault();
+      set(ref(db, 'user/' + document.getElementById("registerUsername").value), {
+        username: document.getElementById("registerUsername").value,
+        phonenumber: document.getElementById("registerPhone").value,
+        email: document.getElementById("registerEmail").value,
+        fooddetails: document.getElementById("foodDetails").value,
+        address: document.getElementById("registerAddress").value
+      });
+      
+      alert("Submit Successfull!!!");
+    })
+  </script>
+</body>
+</html>

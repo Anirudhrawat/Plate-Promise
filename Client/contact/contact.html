@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PlatePromise</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="container">
+                <h1 class="logo lg-heading text-light">PlatePromise</h1>
+                <ul class="nav-items">
+                    <li class="nav-item"><a href="../index/index.html">Home</a></li>
+                    <li class="nav-item"><a href="../about/about.html">About</a></li>
+                    <li class="nav-item"><a href="../contact/contact.html">Contact</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <section>
+        <h1>Contact Us</h1>
+        <form>
+            <div>
+                    <input type="text" class="ip" id="nAme" name="name" required placeholder="Name">
+                </div>
+                <div>
+                    <input type="email" class="ip" id="eMail" name="email" required
+                    placeholder="Email">
+                </div>
+                <div>
+                    <input type="text" class="ip" id="messAge" name="email" required
+                    placeholder="Message">
+                </div>
+                <input type="button" value="Send Message" class="sub" id="submit">
+            </form>
+    </section>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.10.0/firebase-app.js"
+        import { getDatabase, ref, set, get, child } from "https://www.gstatic.com/firebasejs/10.10.0/firebase-database.js";
+        
+        const firebaseConfig = {
+          apiKey: "AIzaSyCvtGxG5dpY051rw4LgFCSUh0m56JxRxfM",
+          authDomain: "creativetutorial-b923e.firebaseapp.com",
+          projectId: "creativetutorial-b923e",
+          storageBucket: "creativetutorial-b923e.appspot.com",
+          messagingSenderId: "626044211596",
+          appId: "1:626044211596:web:1470fdf93f20047ec106a9"
+        };
+    
+        const app = initializeApp(firebaseConfig);
+        const db = getDatabase(app);
+    
+        document.getElementById("submit").addEventListener('click', function(e){
+          e.preventDefault();
+          set(ref(db, 'message/' + document.getElementById("nAme").value), {
+            name: document.getElementById("nAme").value,
+            email: document.getElementById("eMail").value,
+            address: document.getElementById("messAge").value
+          });
+          
+          alert("Message Sent Successfully!!!");
+        })
+      </script>
+</body>
+</html>
